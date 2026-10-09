@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Syafiq Yahya</title>
+    <link rel="stylesheet" href="css/aboutme.css">
+    
+    <!-- Custom Font Ribes -->
+    <style>
+        @font-face {
+            font-family: 'Ribes';
+            src: url('fonts/Ribes-Black.woff2') format('woff2');
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         BACKGROUND SPACE & DARK OVERLAY
+         (Meniru nuansa monokrom / cosmic di index.html)
+         ========================================== -->
+    <div class="space-bg"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- ==========================================
+         CONTAINER UTAMA
+         ========================================== -->
+    <div class="container">
+
+        <!-- Tombol Kembali ke Halaman Utama -->
+        <a href="index.html" class="back-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Kembali ke Beranda
+        </a>
+
+        <!-- Layout Utama: 2 Kolom (Kiri: Profil, Kanan: Detail & Skills) -->
+        <div class="about-grid">
+
+            <!-- ==========================================
+                 KOLOM KIRI: KARTU IDENTITAS PROFIL
+                 ========================================== -->
+            <aside class="profile-card">
+                <!-- Foto Profil -->
+                <div class="photo-wrapper">
+                    <img src="image/profile.jpeg" alt="Foto Syafiq Yahya" class="profile-img">
+                </div>
+
+                <!-- Nama & Role -->
+                <h1 class="profile-name">Syafiq Yahya</h1>
+                <p class="profile-role">Computer Engineer</p>
+
+                <!-- Status Badge -->
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>Asisten Lab Komputer</span>
+                </div>
+
+                <!-- Garis Pemisah -->
+                <hr class="divider">
+
+                <!-- Informasi Kontak Singkat -->
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <a href="mailto:syafiqyahyamaret@gmail.com" class="info-value">syafiqyahyamaret@gmail.com</a>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Github</span>
+                        <a href="https://github.com/Esschan" target="_blank" class="info-value">@Esschan</a>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Jurusan</span>
+                        <span class="info-value">Teknik Komputer</span>
+                    </div>
+                </div>
+
+                <!-- Tombol Aksi / Social Links -->
+                <div class="action-buttons">
+                    <a href="mailto:syafiqyahyamaret@gmail.com" class="btn btn-primary">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                        Kirim Email
+                    </a>
+                    <a href="https://github.com/Esschan" target="_blank" class="btn btn-secondary">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </aside>
+
+
+            <!-- ==========================================
+                 KOLOM KANAN: STORY, STATS, SKILLS & ROLES
+                 ========================================== -->
+            <main class="content-cards">
+
+                <!-- 1. KOTAK BIO / TENTANG SAYA -->
+                <section class="card bio-card">
+                    <h2 class="section-title">
+                        ABOUT ME
+                    </h2>
+                    <p class="bio-text">
+                        Halo! Saya <strong>Syafiq Yahya</strong>, seorang mahasiswa <em>Teknik Komputer</em> yang memiliki minat mendalam pada pengembangan web interaktif, pemrograman, dan eksplorasi teknologi sistem komputer.
+                    </p>
+                    <p class="bio-text">
+                        Saat ini aktif sebagai <strong>Asisten Laboratorium Komputer</strong>, membantu memfasilitasi praktikum dan pemeliharaan perangkat serta jaringan. Saya senang membangun antarmuka web yang rapi, modern, dan fungsional.
+                    </p>
+                </section>
+
+                <!-- 2. KOTAK STATS / HIGHLIGHTS CEPAT -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value">Computer Eng.</span>
+                        <span class="stat-label">Program Studi</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">Lab Assistant</span>
+                        <span class="stat-label">Posisi & Peran</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">Web & Systems</span>
+                        <span class="stat-label">Fokus Minat</span>
+                    </div>
+                </section>
+
+                <!-- 3. KOTAK SKILLS & TEKNOLOGI -->
+                <section class="card skills-card">
+                    <h3 class="card-subtitle">Tech Stack & Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3 / Vanilla CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Git & GitHub</span>
+                        <span class="skill-tag">Computer Hardware</span>
+                        <span class="skill-tag">Computer Networking</span>
+                    </div>
+                </section>
+
+                <!-- 4. KOTAK PENGALAMAN & AKTIVITAS -->
+                <section class="card experience-card">
+                    <h3 class="card-subtitle">Pengalaman & Aktivitas</h3>
+                    <div class="timeline">
+                        
+                        <!-- Item Pengalaman 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-role">Asisten Laboratorium Komputer</h4>
+                                    <span class="timeline-date">Saat Ini</span>
+                                </div>
+                                <p class="timeline-desc">
+                                    Membantu jalannya kegiatan praktikum mahasiswa, troubleshooting perangkat keras/lunak, serta konfigurasi jaringan komputer di laboratorium.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item Pengalaman 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-role">Frontend Web Projects</h4>
+                                    <span class="timeline-date">2024 - Sekarang</span>
+                                </div>
+                                <p class="timeline-desc">
+                                    Merancang dan membuat antarmuka web interaktif (3D Card flip, dynamic eye tracker, responsif design) menggunakan HTML, CSS, dan JavaScript.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </main>
+
+        </div> <!-- Tutup about-grid -->
+
+    </div> <!-- Tutup container -->
+
+</body>
+</html>

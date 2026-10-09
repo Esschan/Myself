@@ -1,0 +1,710 @@
+/* ==========================================================
+   ABOUT ME STYLESHEET - Syafiq Yahya
+   Tema: Cosmic Noir / Dark Monochrome
+   Full Responsive: Desktop, Tablet & Smartphone (HP)
+   ========================================================== */
+
+/* ==========================================================
+   1. VARIABLE WARNA & TEMA (Monokrom / Hitam-Putih-Abu)
+   ========================================================== */
+:root {
+    /* Background & Card Surface */
+    --bg-main: #0a0a0a;
+    --card-bg: rgba(18, 18, 20, 0.82);
+    --card-hover-bg: rgba(28, 28, 32, 0.92);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --card-border-hover: rgba(255, 255, 255, 0.35);
+
+    /* Warna Teks */
+    --text-primary: #ffffff;
+    --text-secondary: #d4d4d8;
+    --text-muted: #8e8e93;
+
+    /* Aksen Monokrom */
+    --accent-white: #ffffff;
+    --accent-dark: #121212;
+
+    /* Font */
+    --font-heading: 'Ribes', sans-serif;
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================================
+   2. RESET & DASAR HALAMAN (Stabil di semua ukuran layar)
+   ========================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================
+   3. BACKGROUND SPACE & OVERLAY
+   ========================================================== */
+.space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../image/space.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.80);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: -1;
+    transform: translateZ(0);
+}
+
+/* ==========================================================
+   4. CONTAINER UTAMA & TOMBOL KEMBALI
+   ========================================================== */
+.container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+    padding: 10px 18px;
+    min-height: 42px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+.back-btn:hover, .back-btn:active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-3px);
+}
+
+/* ==========================================================
+   5. LAYOUT GRID (Desktop 2 Kolom)
+   ========================================================== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 310px 1fr;
+    gap: 24px;
+    align-items: start;
+    width: 100%;
+}
+
+/* ==========================================================
+   6. GAYA KARTU GLASSMORPHISM
+   ========================================================== */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 28px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+
+.card:hover {
+    border-color: var(--card-border-hover);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+}
+
+/* ==========================================================
+   7. KOLOM KIRI: KARTU PROFIL (SIDEBAR)
+   ========================================================== */
+.profile-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 30px 22px;
+    text-align: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 24px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+}
+
+.profile-card:hover {
+    border-color: var(--card-border-hover);
+}
+
+/* Foto Profil */
+.photo-wrapper {
+    position: relative;
+    width: 135px;
+    height: 135px;
+    margin: 0 auto 16px;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.photo-wrapper:hover .profile-img {
+    transform: scale(1.03);
+    border-color: #ffffff;
+}
+
+/* Teks Profil */
+.profile-name {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+.profile-role {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    max-width: 100%;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px #ffffff;
+    flex-shrink: 0;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background: var(--card-border);
+    margin: 12px 0 16px;
+}
+
+/* Info Kontak List */
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.info-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: var(--text-secondary);
+    text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    text-align: right;
+}
+
+a.info-value:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Tombol Aksi */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    min-height: 42px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+    width: 100%;
+}
+
+.btn-primary {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background: #e4e4e7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+}
+
+.btn-secondary:hover, .btn-secondary:active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   8. KOLOM KANAN: KONTEN UTAMA
+   ========================================== */
+.content-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.card-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    color: #ffffff;
+}
+
+.bio-text {
+    color: var(--text-secondary);
+    font-size: 0.96rem;
+    margin-bottom: 12px;
+    line-height: 1.65;
+}
+
+.bio-text:last-child {
+    margin-bottom: 0;
+}
+
+.bio-text strong {
+    color: #ffffff;
+}
+
+.bio-text em {
+    color: #e4e4e7;
+    font-style: normal;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================
+   9. STATS GRID (Highlights)
+   ========================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.25s ease;
+    text-align: center;
+}
+
+.stat-card:hover {
+    border-color: var(--card-border-hover);
+    background: var(--card-hover-bg);
+    transform: translateY(-2px);
+}
+
+.stat-value {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+    word-break: break-word;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   10. SKILLS TAGS
+   ========================================== */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e4e4e7;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.skill-tag:hover, .skill-tag:active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================
+   11. TIMELINE PENGALAMAN & AKTIVITAS
+   ========================================== */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    padding-left: 18px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    margin-left: 6px;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -23px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--bg-main);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.timeline-role {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.timeline-date {
+    font-size: 0.72rem;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.timeline-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+}
+
+/* ==========================================================
+   12. RESPONSIVE MEDIA QUERIES (HP & Tablet)
+   ========================================================== */
+
+/* Tablet (Layar <= 880px) */
+@media screen and (max-width: 880px) {
+    body {
+        padding: 30px 16px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .profile-card {
+        position: static;
+        padding: 26px 20px;
+    }
+
+    .action-buttons {
+        flex-direction: row;
+    }
+
+    .action-buttons .btn {
+        flex: 1;
+    }
+}
+
+/* Smartphone / HP Standar (Layar <= 600px) */
+@media screen and (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .back-btn {
+        margin-bottom: 18px;
+        padding: 8px 14px;
+        font-size: 0.84rem;
+    }
+
+    .card, .profile-card {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .photo-wrapper {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 12px;
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    .profile-role {
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+    }
+
+    .info-list {
+        font-size: 0.84rem;
+        gap: 8px;
+    }
+
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding-bottom: 6px;
+    }
+
+    .info-value {
+        text-align: left;
+        white-space: normal;
+        word-break: break-all;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+    }
+
+    .card-subtitle {
+        font-size: 1.15rem;
+        margin-bottom: 12px;
+    }
+
+    .bio-text {
+        font-size: 0.9rem;
+    }
+
+    /* Stats Grid di HP: Tampilkan 3 kolom ringkas yang rapi */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 12px 6px;
+        border-radius: 12px;
+    }
+
+    .stat-value {
+        font-size: 0.82rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+        letter-spacing: 0px;
+    }
+
+    .skills-list {
+        gap: 6px;
+    }
+
+    .skill-tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .timeline {
+        padding-left: 14px;
+        margin-left: 4px;
+        gap: 16px;
+    }
+
+    .timeline-dot {
+        left: -19px;
+        width: 8px;
+        height: 8px;
+        top: 5px;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+
+    .timeline-role {
+        font-size: 0.92rem;
+    }
+
+    .timeline-date {
+        font-size: 0.68rem;
+    }
+
+    .timeline-desc {
+        font-size: 0.84rem;
+    }
+}
+
+/* Smartphone Layar Sangat Kecil (Layar <= 360px) */
+@media screen and (max-width: 360px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 10px;
+    }
+
+    .stat-value {
+        font-size: 0.9rem;
+    }
+
+    .profile-name {
+        font-size: 1.35rem;
+    }
+}
