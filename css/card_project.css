@@ -8,7 +8,7 @@ body {
     font-family: "Ribes";
     background-color: azure;
     margin: 30px 80px;
-    height: 100vh;
+    min-height: 100vh;
 
 }
 
@@ -153,4 +153,46 @@ transition: all 0.3s ease;
     list-style: none;
     font-size: 1.1rem;
     line-height: 1.8;
+}
+
+/* --- RESPONSIVE UNTUK HP --- */
+@media screen and (max-width: 768px) {
+    body {
+        margin: 20px; /* Margin lebih kecil di HP */
+    }
+
+    .wrapper {
+        flex-direction: column; /* Tumpuk card dan teks ke bawah */
+        align-items: center; /* Posisikan ke tengah */
+        gap: 40px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .side-description {
+        text-align: center; /* Tengahkan teks di HP */
+    }
+    
+    .side-description h2 {
+        text-align: center;
+        font-size: 2.2rem;
+    }
+
+    .side-description p {
+        text-align: center;
+    }
+
+    .side-description ul {
+        text-align: left;
+        display: inline-block; /* Agar bullet rapi di tengah */
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .card {
+        height: 480px; /* Sesuaikan tinggi card untuk layar sangat kecil */
+    }
 }
