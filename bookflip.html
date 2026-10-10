@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flip Project</title>
+    <!-- Font tulisan tangan untuk keterangan foto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bookflip.css">
+</head>
+<body>
+
+<header class="judul">
+    <span class="label">Project &middot; Book Flip</span>
+    <h1>Buku Kenangan</h1>
+</header>
+
+<!-- Tiap halaman = 1 <div class="page">. Jumlah halaman sebaiknya GENAP. -->
+<div class="bookflip">
+
+    <!-- Halaman 1: sampul depan -->
+    <div class="page hard">
+        <span class="label">Volume 01</span>
+        <h2>Text</h2>
+        <small>Isi text</small>
+    </div>
+
+    <div class="page">
+        <h3>Daftar Isi</h3>
+        <small>text_kecil1</small>
+        <small>text_kecil2</small>
+    </div>
+
+    <div class="page">
+        <img src="image/velina.jpg" alt="velina">
+        <small>Nama gambar</small>
+    </div>
+
+    <div class="page">
+        <img src="image/velina1.jpg" alt="velina1">
+        <small>Nama gambar</small>
+    </div>
+
+    <div class="page">
+        <img src="image/velina2.jpg" alt="velina2">
+        <small>Nama gambar</small>
+    </div>
+
+    <div class="page">
+        <img src="image/velina3.jpg" alt="velina3">
+        <small>Nama gambar</small>
+    </div>
+
+    <div class="page">
+        <img src="image/space.jpg" alt="space">
+        <small>Nama gambar</small>
+    </div>
+
+    <div class="page">
+        <h3>Text2</h3>
+        <small>Isi Text2</small>
+    </div>
+
+    <div class="page">
+        <h3>Text3</h3>
+        <small>Isi text3</small>
+    </div>
+
+    <!-- Halaman 10: sampul belakang (biar jumlahnya genap) -->
+    <div class="page hard">
+        <h2>Tamat</h2>
+        <small>Terima kasih</small>
+    </div>
+
+</div>
+
+<nav class="kontrol">
+    <button id="tombol-kiri" aria-label="Halaman sebelumnya">&#8249;</button>
+    <span id="info-halaman">Halaman 1 dari 10</span>
+    <button id="tombol-kanan" aria-label="Halaman berikutnya">&#8250;</button>
+</nav>
+
+<!-- Urutan WAJIB: jQuery dulu, baru turn.js, baru kode kamu -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+
+<script>
+    var buku = $('.bookflip');
+
+    // 1. Beri tiap halaman: posisi (kiri/kanan) + nomor halaman.
+    //    Halaman 1 ada di kanan, halaman 2 di kiri, dst. Sampul tidak diberi nomor.
+    $('.bookflip .page').each(function (i) {
+        var nomor = i + 1;
+        $(this).addClass(nomor % 2 === 0 ? 'kiri' : 'kanan');
+
+        if (!$(this).hasClass('hard')) {
+            $(this).append('<span class="nomor">' + nomor + '</span>');
+        }
+    });
+
+    // 2. Jadikan buku bisa dibalik
+    buku.turn({
+        width: 800,   // lebar buku terbuka (2 halaman) -> 1 halaman = 400px
+        height: 500   // tinggi buku
+    });
+
+    // 3. Setiap halaman berganti: update tulisan, tombol, dan posisi buku
+    function updateTampilan(halaman) {
+        var total = buku.turn('pages');
+
+        $('#info-halaman').text('Halaman ' + halaman + ' dari ' + total);
+        $('#tombol-kiri').prop('disabled', halaman === 1);
+        $('#tombol-kanan').prop('disabled', halaman === total);
+
+        // Saat buku tertutup, geser ke tengah supaya tidak miring sebelah
+        buku.toggleClass('tertutup-depan', halaman === 1);
+        buku.toggleClass('tertutup-belakang', halaman === total);
+    }
+
+    buku.bind('turning', function (e, halaman) {
+        updateTampilan(halaman);
+    });
+    updateTampilan(1);
+
+    // 4. Klik buku: sisi kanan = maju, sisi kiri = mundur
+    buku.on('click', function (e) {
+        // Kalau halaman sedang dibalik, abaikan klik
+        if (buku.turn('animating')) return;
+
+        var posisiX = e.pageX - buku.offset().left; // posisi klik dari kiri buku
+        var tengah  = buku.width() / 2;
+
+        if (posisiX > tengah) {
+            buku.turn('next');
+        } else {
+            buku.turn('previous');
+        }
+    });
+
+    // 5. Tombol & keyboard
+    $('#tombol-kiri').on('click', function () { buku.turn('previous'); });
+    $('#tombol-kanan').on('click', function () { buku.turn('next'); });
+
+    $(document).keydown(function (e) {
+        if (e.key === 'ArrowRight') buku.turn('next');
+        if (e.key === 'ArrowLeft')  buku.turn('previous');
+    });
+</script>
+</body>
+</html>
