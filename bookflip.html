@@ -13,6 +13,7 @@
 <body>
 
 <header class="judul">
+    <a href="index.html#work" class="kembali">&larr; Kembali</a>
     <span class="label">Project &middot; Book Flip</span>
     <h1>Buku Kenangan</h1>
 </header>
@@ -100,13 +101,50 @@
         }
     });
 
-    // 2. Jadikan buku bisa dibalik
-    buku.turn({
-        width: 800,   // lebar buku terbuka (2 halaman) -> 1 halaman = 400px
-        height: 500   // tinggi buku
+    // 2. Hitung ukuran buku sesuai layar
+    //    HP (layar sempit)   -> 1 halaman (single)
+    //    PC/tablet (lebar)   -> 2 halaman (double), maksimal 800x500
+    function hitungUkuran() {
+        var lebarLayar  = $(window).width() - 32;   // sisakan 16px kiri & kanan
+        var tinggiLayar = $(window).height() - 260; // sisakan tempat untuk judul & tombol
+        var mode, lebar, tinggi;
+
+        if (lebarLayar < 700) {
+            mode = 'single';
+            lebar = Math.min(lebarLayar, 420);
+            tinggi = lebar * 1.3;      // halaman tegak seperti buku
+        } else {
+            mode = 'double';
+            lebar = Math.min(lebarLayar, 800);
+            tinggi = lebar * 0.625;    // 800 x 500
+        }
+
+        // Kalau terlalu tinggi untuk layar, kecilkan (perbandingannya tetap)
+        if (tinggi > tinggiLayar && tinggiLayar > 300) {
+            lebar = lebar * (tinggiLayar / tinggi);
+            tinggi = tinggiLayar;
+        }
+
+        return { display: mode, width: Math.round(lebar), height: Math.round(tinggi) };
+    }
+
+    // 3. Jadikan buku bisa dibalik
+    var ukuran = hitungUkuran();
+    buku.turn(ukuran);
+    buku.toggleClass('satu-halaman', ukuran.display === 'single');
+
+    // Saat layar diputar / ukuran jendela berubah, sesuaikan lagi bukunya
+    $(window).on('resize', function () {
+        var baru = hitungUkuran();
+
+        if (baru.display !== buku.turn('display')) {
+            buku.turn('display', baru.display);
+        }
+        buku.turn('size', baru.width, baru.height);
+        buku.toggleClass('satu-halaman', baru.display === 'single');
     });
 
-    // 3. Setiap halaman berganti: update tulisan, tombol, dan posisi buku
+    // 4. Setiap halaman berganti: update tulisan, tombol, dan posisi buku
     function updateTampilan(halaman) {
         var total = buku.turn('pages');
 
@@ -124,7 +162,7 @@
     });
     updateTampilan(1);
 
-    // 4. Klik buku: sisi kanan = maju, sisi kiri = mundur
+    // 5. Klik buku: sisi kanan = maju, sisi kiri = mundur
     buku.on('click', function (e) {
         // Kalau halaman sedang dibalik, abaikan klik
         if (buku.turn('animating')) return;
@@ -139,7 +177,7 @@
         }
     });
 
-    // 5. Tombol & keyboard
+    // 6. Tombol & keyboard
     $('#tombol-kiri').on('click', function () { buku.turn('previous'); });
     $('#tombol-kanan').on('click', function () { buku.turn('next'); });
 

@@ -6,7 +6,8 @@
     <title>Myself</title>
     <!-- Ganti Vite dengan CSS statis -->
     <link rel="stylesheet" href="css/app.css">
-    <script type="module" src="js/app.js"></script>
+    <!-- Gaya tambahan (menu HP, dll) -->
+    <link rel="stylesheet" href="css/index.css">
     <style>
         /* Font Ribes statis */
         @font-face {
@@ -42,12 +43,26 @@
         <div class="relative z-20 flex flex-col min-h-screen"> 
             
             <!-- nav mulai -->
-            <nav class="flex justify-between items-center px-10 py-8 text-white">
+            <nav class="nav-utama relative flex justify-between items-center px-10 py-8 text-white">
                 <div class="text-3xl font-ribes">ESS   </div>
+
+                <!-- Menu untuk layar lebar (PC/tablet) -->
                 <div class="hidden md:flex space-x-8 text-xs uppercase tracking-widest">
                     <a href="index.html" class="hover:text-gray-500 transition">Home</a>
                     <a href="aboutme.html" class="hover:text-gray-500 transition">About</a>
                     <a href="#work" class="hover:text-gray-500 transition">Work</a>
+                </div>
+
+                <!-- Tombol garis tiga, hanya tampil di HP -->
+                <button class="tombol-menu" id="tombol-menu" aria-label="Buka menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+
+                <!-- Menu HP, muncul saat tombol garis tiga ditekan -->
+                <div class="menu-hp" id="menu-hp">
+                    <a href="index.html">Home</a>
+                    <a href="aboutme.html">About</a>
+                    <a href="#work">Work</a>
                 </div>
             </nav>
             <!-- nav selesai -->
@@ -92,7 +107,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="block hover:text-white transition">
+                                <a href="bookflip.html" class="block hover:text-white transition">
                                     <h3 class="text-lg text-white font-semibold">2. Book flip</h3>
                                     <p class="text-sm">Membuat buku dengan efek flip menggunakan HTML, CSS dan JavaScript.</p>
                                 </a>
@@ -162,13 +177,35 @@
             updateEyePosition(pupilRight, coverRight, mouseX, mouseY);
         });
 
-        window.addEventListener('touchmove', (e) => {
+        // Di HP: mata ikut jari saat layar disentuh (touchstart) maupun digeser (touchmove)
+        function ikutiJari(e) {
             if(e.touches.length > 0) {
                 const touchX = e.touches[0].clientX;
                 const touchY = e.touches[0].clientY;
                 updateEyePosition(pupilLeft, coverLeft, touchX, touchY);
                 updateEyePosition(pupilRight, coverRight, touchX, touchY);
             }
+        }
+        window.addEventListener('touchstart', ikutiJari, { passive: true });
+        window.addEventListener('touchmove', ikutiJari, { passive: true });
+
+        // Menu HP: buka/tutup saat tombol garis tiga ditekan
+        const tombolMenu = document.getElementById('tombol-menu');
+        const menuHp = document.getElementById('menu-hp');
+
+        function aturMenu(buka) {
+            menuHp.classList.toggle('buka', buka);
+            tombolMenu.classList.toggle('buka', buka);
+            tombolMenu.setAttribute('aria-expanded', buka);
+        }
+
+        tombolMenu.addEventListener('click', () => {
+            aturMenu(!menuHp.classList.contains('buka'));
+        });
+
+        // Setelah pilih salah satu link, menu ditutup lagi
+        menuHp.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => aturMenu(false));
         });
     </script>
 </body>

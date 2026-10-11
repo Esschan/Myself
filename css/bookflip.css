@@ -37,7 +37,7 @@ body {
     background:
         radial-gradient(circle at 50% 40%, rgba(212, 169, 90, 0.12), transparent 60%),
         linear-gradient(rgba(11, 10, 18, 0.82), rgba(11, 10, 18, 0.95)),
-        url('../image/space2.jpg') center / cover fixed,
+        url('../image/space2.jpg') center / cover,
         var(--latar);
 }
 
@@ -62,20 +62,34 @@ body {
     letter-spacing: 0.02em;
 }
 
+.kembali {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: #b9b0c4;
+    text-decoration: none;
+}
+
+.kembali:hover {
+    color: var(--emas);
+}
+
 /* ===== Buku ===== */
-/* Ukuran harus sama dengan width/height di buku.turn({...}) */
+/* Lebar & tinggi buku diatur oleh JavaScript (fungsi hitungUkuran) */
 .bookflip {
-    width: 800px;
-    height: 500px;
     cursor: pointer;
     /* drop-shadow mengikuti bentuk halaman yang kelihatan */
     filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.6));
     transition: transform 0.6s ease;
 }
 
-/* Buku tertutup: geser setengah halaman biar ada di tengah */
-.bookflip.tertutup-depan     { transform: translateX(-200px); }
-.bookflip.tertutup-belakang  { transform: translateX(200px); }
+/* Buku tertutup: geser setengah halaman biar ada di tengah
+   (25% dari lebar buku = setengah dari 1 halaman) */
+.bookflip.tertutup-depan     { transform: translateX(-25%); }
+.bookflip.tertutup-belakang  { transform: translateX(25%); }
+
+/* Mode HP (1 halaman): tidak perlu digeser */
+.bookflip.satu-halaman       { transform: none; }
 
 /* ===== Halaman biasa ===== */
 .bookflip .page {
@@ -100,6 +114,17 @@ body {
 .bookflip .page.kanan {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.14), transparent 45px);
     border-radius: 0 6px 6px 0;
+}
+
+/* Mode HP: semua halaman tampil di kanan, jadi bayangan lipatan selalu di kiri.
+   :not(.hard) = kecuali sampul, supaya warna sampul tidak ketimpa */
+.bookflip.satu-halaman .page:not(.hard) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.12), transparent 30px);
+    border-radius: 0 6px 6px 0;
+}
+
+.bookflip.satu-halaman .page.kiri img {
+    transform: rotate(2deg);
 }
 
 .bookflip .page h3 {
@@ -200,4 +225,31 @@ body {
     font-size: 13px;
     letter-spacing: 0.08em;
     color: #b9b0c4;
+}
+
+/* ===== Layar HP ===== */
+@media (max-width: 700px) {
+    body {
+        gap: 20px;
+    }
+
+    .judul h1 {
+        font-size: 30px;
+    }
+
+    .bookflip .page {
+        padding: 28px 20px;
+    }
+
+    .bookflip .page h3 {
+        font-size: 24px;
+    }
+
+    .bookflip .page.hard h2 {
+        font-size: 40px;
+    }
+
+    .bookflip .page img {
+        width: 85%;
+    }
 }

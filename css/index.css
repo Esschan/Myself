@@ -1,0 +1,100 @@
+/* CSS tambahan untuk index.html.
+   app.css adalah hasil build Tailwind, jadi class Tailwind baru (misal md:hidden)
+   TIDAK akan jalan kalau ditulis di HTML. Tambahan gaya ditulis manual di sini. */
+
+html {
+    scroll-behavior: smooth; /* klik "Work" -> scroll halus */
+}
+
+/* Di HP, 100vh ikut berubah saat address bar muncul/hilang -> layar "loncat".
+   svh = tinggi layar terkecil, jadi tampilannya stabil. */
+.min-h-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+/* Di HP jarak kiri-kanan navbar dibuat lebih kecil */
+@media (max-width: 47.99rem) {
+    .nav-utama {
+        padding-left: 24px;
+        padding-right: 16px;
+    }
+}
+
+/* ===== Tombol menu garis tiga (khusus HP) ===== */
+.tombol-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.tombol-menu span {
+    display: block;
+    height: 2px;
+    background: white;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Saat menu terbuka, garis tiga berubah jadi tanda X */
+.tombol-menu.buka span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.tombol-menu.buka span:nth-child(2) { opacity: 0; }
+.tombol-menu.buka span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ===== Menu yang muncul di HP ===== */
+.menu-hp {
+    position: absolute;
+    top: 100%;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(8px);
+
+    /* Disembunyikan dulu, muncul saat diberi class "buka" */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+}
+
+.menu-hp.buka {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-hp a {
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.menu-hp a:active,
+.menu-hp a:hover {
+    background: #1f1f1f;
+}
+
+/* Layar lebar (768px ke atas, sama dengan "md" di Tailwind):
+   tombol & menu HP disembunyikan, menu biasa yang tampil */
+@media (min-width: 48rem) {
+    .tombol-menu,
+    .menu-hp {
+        display: none;
+    }
+}
+
+/* Safari HP masih menampilkan segitiga bawaan <summary>, kita sembunyikan */
+summary::-webkit-details-marker {
+    display: none;
+}
